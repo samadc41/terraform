@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
@@ -32,7 +32,7 @@ jobs:
         run: terraform plan -input=false -out=tfplan
 
       - name: Save Plan as Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: terraform-plan
           path: tfplan
@@ -43,12 +43,10 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: production
-      # This triggers manual approval in GitHub Environments
-      # Go to GitHub → Settings → Environments → "production" → require reviewers
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
@@ -62,7 +60,7 @@ jobs:
         run: terraform init
 
       - name: Download Plan
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: terraform-plan
           path: .
